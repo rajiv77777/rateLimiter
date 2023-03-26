@@ -111,12 +111,14 @@
 #
 ## **Tesing the SpringBoot App**
 #
-### 1.Open Spring Suite application (STS) and import the project from this repository from **master** branch.
-### 2.Run the application as Spring boot application
-### 3.Application will be running from port 8080
-### 4.Open http://localhost:8080/h2-console/ and use the below mentioned params and connect to the Database
+### 1.Create a folder under C:\Users\<user>\RateLimiter in locak machine
+### 2.Open GIT bash and run `git clone -b master https://github.com/rajiv77777/rateLimiter.git`
+### 3.Open Spring Suite application (STS) and import the project from C:\Users\<user>\RateLimiter. After importing do maven clean install so that the dependencies are installed.
+### 4.When Maven build is successfull. Run the application as Spring boot application
+### 5.Application will be running from port 8080
+### 6.Open http://localhost:8080/h2-console/ and use the below mentioned params and connect to the Database
 ### ![h2console](https://github.com/rajiv77777/rateLimiter/blob/master/pics/h2console-login.png)
-### 5.In the SQL window run the below mentioned queries. Refernce screenshot as below.
+### 7.In the SQL window run the below mentioned queries. Refernce screenshot as below.
     insert into RATE_LIMITER_MODEL values (1,'Ram','Football');
     insert into RATE_LIMITER_MODEL values (2,'peter','Football');
     insert into RATE_LIMITER_MODEL values (3,'Rajiv','Cricket');
@@ -124,8 +126,11 @@
     insert into RATE_LIMITER_MODEL values (5,'Harry','Cricket');
     
 ### ![insertDb](https://github.com/rajiv77777/rateLimiter/blob/master/pics/insertDB.png)
-### 6. DB records should be updated as below.
+### 8. DB records should be updated as below.
 ### ![insertDbsuccess](https://github.com/rajiv77777/rateLimiter/blob/master/pics/insertDB-success.png)
-### 7.Run the below mentioned command to fetch all DB datas
+### 9.Run the below mentioned command to fetch all DB datas
     select * from RATE_LIMITER_MODEL;
 ### ![selectAllDb](https://github.com/rajiv77777/rateLimiter/blob/master/pics/select-all-FromDB.png)
+### 10. Open Postman and create 2 GET requests as `http://localhost:8080/api/findall` and `http://localhost:8080/api/findByID/1`
+### 11. Add header to both of the GET requests as below and test the ratelimiters based on API and User authorization. Reference image is as below.
+### URL
