@@ -108,6 +108,29 @@
 ### `@GetMapping(value = "/api/findByID/{id}")` has its own bucket object which consumes its tokens and refills its token by a individual object.
      bucket4jConfiguration bc1 = new bucket4jConfiguration(rateLimiterPerTimeWindow_GetDataByIDApi,rateLimiterWaitTime_GetDataByIDApi);
 	 @GetMapping(value = "/api/findByID/{id}"
+
+#
+## **Junit Testcases**
+#
+### 2 Mock tests are done for 2 API's GET requests to check if they are giving status codes in the range of 2XX (200 - 299) and also they are running in the correct context roots of URL.
+    @Test
+	  public void findAllApiTest() throws Exception {
+		mockMvc.perform(MockMvcRequestBuilders
+	    			.get("/api/findall").header("secretkey", secretCode)
+	    			.accept(MediaType.APPLICATION_JSON))
+	        .andDo(print())
+	        .andExpect(status().is2xxSuccessful());
+	  }
+	
+	@Test
+	  public void findByIDTest() throws Exception {
+		mockMvc.perform(MockMvcRequestBuilders
+	    			.get("/api/findByID/1").header("secretkey", secretCode)
+	    			.accept(MediaType.APPLICATION_JSON))
+	        .andDo(print())
+	        .andExpect(status().is2xxSuccessful());
+	  }
+
 #
 ## **Tesing the SpringBoot App**
 #
@@ -134,4 +157,4 @@
 ### 10. Open Postman and create 2 GET requests as `http://localhost:8080/api/findall` and `http://localhost:8080/api/findByID/1`
 ### 11. Add `secretkey = <secretkey>`(as per application.properties file) header to both of the GET requests as below and test the ratelimiters based on API and User authorization. Reference image is as below.
 ### ![postman-headers](https://github.com/rajiv77777/rateLimiter/blob/master/pics/postman-headers.png)
-### Note:If external params are failing to fetch from application.properties, please maven build it again to load the `Resourcebundle` and run as spring boot application.
+### **Note:** If external params are failing to fetch from application.properties, please maven build it again to load the `Resourcebundle` and run as spring boot application.
