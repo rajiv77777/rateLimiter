@@ -132,6 +132,6 @@
     select * from RATE_LIMITER_MODEL;
 ### ![selectAllDb](https://github.com/rajiv77777/rateLimiter/blob/master/pics/select-all-FromDB.png)
 ### 10. Open Postman and create 2 GET requests as `http://localhost:8080/api/findall` and `http://localhost:8080/api/findByID/1`
-### 11. Add header to both of the GET requests as below and test the ratelimiters based on API and User authorization. Reference image is as below.
-### ![selectAllDb](https://github.com/rajiv77777/rateLimiter/blob/master/pics/postman-headers.png)
+### 11. Add `secretkey = <secretkey>`(as per application.properties file) header to both of the GET requests as below and test the ratelimiters based on API and User authorization. Reference image is as below.
+### ![postman-headers](https://github.com/rajiv77777/rateLimiter/blob/master/pics/postman-headers.png)
 ### Note:If external params are failing to fetch from application.properties, please maven build it again to load the `Resourcebundle` and run as spring boot application.
