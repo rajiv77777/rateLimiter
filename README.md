@@ -115,7 +115,7 @@
 ### 2.Run the application as Spring boot application
 ### 3.Application will be running from port 8080
 ### 4.Open http://localhost:8080/h2-console/ and use the below mentioned params and connect to the Database
-### link h2 console
+### ![h2console](https://github.com/rajiv77777/rateLimiter/blob/master/pics/h2console-login.png)
 ### 5.In the SQL window run the below mentioned queries. Refernce screenshot as below.
     insert into RATE_LIMITER_MODEL values (1,'Ram','Football');
     insert into RATE_LIMITER_MODEL values (2,'peter','Football');
@@ -123,9 +123,9 @@
     insert into RATE_LIMITER_MODEL values (4,'john','Baseball');
     insert into RATE_LIMITER_MODEL values (5,'Harry','Cricket');
     
-### link insertDB
+### ![insertDb](https://github.com/rajiv77777/rateLimiter/blob/master/pics/insertDB.png)
 ### 6. DB records should be updated as below.
-### link insertDB success
+### ![insertDbsuccess](https://github.com/rajiv77777/rateLimiter/blob/master/pics/insertDB-success.png)
 ### 7.Run the below mentioned command to fetch all DB datas
     select * from RATE_LIMITER_MODEL;
-### link select all from DB
+### ![selectAllDb](https://github.com/rajiv77777/rateLimiter/blob/master/pics/select-all-FromDB.png)
