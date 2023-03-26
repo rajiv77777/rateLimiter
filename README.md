@@ -1,10 +1,12 @@
 # **Rate Limiter implementation on REST APIs using token-bucket algorithm**
 
 ## **Introduction**
+#
 ### This project has 2 APIs implemented with RateLimiters and  user authorization based on a token code for accessing the API. One Api is used to query all the datas from the H2 Database and another API displays the record with respect to ID query parameter from the same database.
 #
 
 ## **Dependencies**
+#
 |S.No|Dependency|Version|
 ----|-----|-------|
 |1|spring-boot-starter-parent|3.0.5|
@@ -14,6 +16,7 @@
 #
 
 ## **Implementation**
+#
 ### The 2 APIs will be running on port 8080 with the following context roots - http://localhost:8080/api/findall and http://localhost:8080/api/findByID/1
 
 `@GetMapping(value = "/api/findall")`
@@ -68,3 +71,61 @@
 
 ### The request header checks the for the secretkey and it accepts the request only if it matches the secretkey. The secretkey configuration is mentioned in application.properties file.<br> `secret=Password@#12345`<br>The secretkey can be changed from the properties file and no manual intervention on code is required. A sample postman snapshot is as below.
 ![postman](https://github.com/rajiv77777/rateLimiter/blob/master/pics/secretKey-postman.png)
+#
+## **Exception Handling**
+#
+1. ### When a request crosses its transaction limit in the assigned window time, the API throws an exception <br> `ERROR CODE - 429 Too Many Requests` as a HTTP status code.
+2. ### When a request has a invalid secret key, the API throws <br> `ERROR CODE - 403 Forbidden` as an unauthorized user .
+#
+## **Bucket4j dependency Working and integration**
+#
+    public class bucket4jConfiguration {
+
+	public final Bucket bucket;
+
+	public bucket4jConfiguration(int transactionsAllowed,int waitTime) {
+		 Bandwidth limit = Bandwidth.classic(transactionsAllowed, Refill.intervally(transactionsAllowed, Duration.ofSeconds(waitTime)));
+	     this.bucket = Bucket4j.builder()
+	             .addLimit(limit)
+	             .build();
+	    }
+    }
+
+### Bucket4j uses Token Bucket Alogorithm. Let's consider an API that has a rate limit of 100 requests per minute. We can create a bucket with a capacity of 100, and a refill rate of 100 tokens per minute. If we receive 70 requests, which is fewer than the available tokens in a given minute, we would add only 30 more tokens at the start of the next minute to bring the bucket up to capacity. On the other hand, if we exhaust all the tokens in 40 seconds, we would wait for 20 seconds to refill the bucket.
+<br>
+
+### As per the constructor initialisation we are creating an object with the transactionsAllowed and waitTime from the application.properties file.
+`public bucket4jConfiguration(int transactionsAllowed,int waitTime)`
+<br>
+
+### And also to get no confilict there are individual objects created for individual APIs
+### `@GetMapping(value = "/api/findall")` has its own bucket object which consumes its tokens and refills its token by a individual object.
+
+    bucket4jConfiguration bc = new bucket4jConfiguration(rateLimiterPerTimeWindow_GetAllDataApi,rateLimiterWaitTime_GetAllDataApi);
+
+	 @GetMapping(value = "/api/findall")
+
+### `@GetMapping(value = "/api/findByID/{id}")` has its own bucket object which consumes its tokens and refills its token by a individual object.
+     bucket4jConfiguration bc1 = new bucket4jConfiguration(rateLimiterPerTimeWindow_GetDataByIDApi,rateLimiterWaitTime_GetDataByIDApi);
+	 @GetMapping(value = "/api/findByID/{id}"
+#
+## **Tesing the SpringBoot App**
+#
+### 1.Open Spring Suite application (STS) and import the project from this repository from **master** branch.
+### 2.Run the application as Spring boot application
+### 3.Application will be running from port 8080
+### 4.Open http://localhost:8080/h2-console/ and use the below mentioned params and connect to the Database
+### link h2 console
+### 5.In the SQL window run the below mentioned queries. Refernce screenshot as below.
+    insert into RATE_LIMITER_MODEL values (1,'Ram','Football');
+    insert into RATE_LIMITER_MODEL values (2,'peter','Football');
+    insert into RATE_LIMITER_MODEL values (3,'Rajiv','Cricket');
+    insert into RATE_LIMITER_MODEL values (4,'john','Baseball');
+    insert into RATE_LIMITER_MODEL values (5,'Harry','Cricket');
+    
+### link insertDB
+### 6. DB records should be updated as below.
+### link insertDB success
+### 7.Run the below mentioned command to fetch all DB datas
+    select * from RATE_LIMITER_MODEL;
+### link select all from DB
