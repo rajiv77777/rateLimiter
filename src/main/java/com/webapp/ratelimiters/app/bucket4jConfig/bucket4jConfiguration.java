@@ -8,6 +8,7 @@ import io.github.bucket4j.Refill;
 
 
 public class bucket4jConfiguration {
+
 	public final Bucket bucket;
 
 	public bucket4jConfiguration(int transactionsAllowed,int waitTime) {
