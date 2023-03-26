@@ -136,7 +136,11 @@
 ### 2.Open GIT bash and run `git clone -b master https://github.com/rajiv77777/rateLimiter.git`
 ### 3.Open Spring Suite application (STS) and import the project as `existing Maven project` from C:\Users\<user>\RateLimiter. After importing do maven clean install so that the dependencies are installed.
 ### 4.When Maven build is successfull. Run the application as Spring boot application
-### 5.Application will be running from port 8080
+### 5.Application will be running from port 8080. And the Spring boot startup logs has a log statement configured where it denotes the ratelimiter transcations allowed in a window time along with the configured secrectkey from the application.properties file. The sample of the loaded data from application.properties file is as below
+### `Ratelimits and Wait time configurations - 3 20 5 30 , Secret Code for Auth Password@#12345` <br> where,
+#### `3 = ratelimiterGetAllDataAPI and 20 = waitTimeGetAllDataAPI`  
+#### `5 = ratelimiterGetDataByIDAPI and 30 = waitTimeGetDataByIDAPI`  
+#### `Password@#12345 = secretkey`
 ### 6.Open http://localhost:8080/h2-console/ and use the below mentioned params and connect to the Database
 ### ![h2console](https://github.com/rajiv77777/rateLimiter/blob/master/pics/h2console-login.png)
 ### 7.In the SQL window run the below mentioned queries. Refernce screenshot as below.
@@ -155,4 +159,4 @@
 ### 10. Open Postman and create 2 GET requests as `http://localhost:8080/api/findall` and `http://localhost:8080/api/findByID/1`
 ### 11. Add `secretkey = <secretkey>`(as per application.properties file) header to both of the GET requests as below and test the ratelimiters based on API and User authorization. Reference image is as below.
 ### ![postman-headers](https://github.com/rajiv77777/rateLimiter/blob/master/pics/postman-headers.png)
-### **Note:** If external params are failing to fetch from application.properties, please maven build it again to load the `Resourcebundle` and run as spring boot application.
+### **Note:** If external params are failing to fetch from application.properties, please maven build it again to load the `Resourcebundle` and run as spring boot application so that the new datas updated in application.properties file is loaded into `Resourcebundle`.
