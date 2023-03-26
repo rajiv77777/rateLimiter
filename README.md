@@ -1,12 +1,11 @@
 # **Rate Limiter implementation on REST APIs using token-bucket algorithm**
 
 ## **Introduction**
-#
+
 ### This project has 2 APIs implemented with RateLimiters and  user authorization based on a token code for accessing the API. One Api is used to query all the datas from the H2 Database and another API displays the record with respect to ID query parameter from the same database.
 #
-
 ## **Dependencies**
-#
+
 |S.No|Dependency|Version|
 ----|-----|-------|
 |1|spring-boot-starter-parent|3.0.5|
@@ -14,9 +13,8 @@
 |3|bucket4j-core|4.10.0|
 |4|mockito-junit-jupiter|-|
 #
-
 ## **Implementation**
-#
+
 ### The 2 APIs will be running on port 8080 with the following context roots - http://localhost:8080/api/findall and http://localhost:8080/api/findByID/1
 
 `@GetMapping(value = "/api/findall")`
@@ -73,12 +71,12 @@
 ![postman](https://github.com/rajiv77777/rateLimiter/blob/master/pics/secretKey-postman.png)
 #
 ## **Exception Handling**
-#
+
 1. ### When a request crosses its transaction limit in the assigned window time, the API throws an exception <br> `ERROR CODE - 429 Too Many Requests` as a HTTP status code.
 2. ### When a request has a invalid secret key, the API throws <br> `ERROR CODE - 403 Forbidden` as an unauthorized user .
 #
 ## **Bucket4j dependency Working and integration**
-#
+
     public class bucket4jConfiguration {
 
 	public final Bucket bucket;
@@ -111,7 +109,7 @@
 
 #
 ## **Junit Testcases**
-#
+
 ### 2 Mock tests are done for 2 API's GET requests to check if they are giving status codes in the range of 2XX (200 - 299) and also they are running in the correct context roots of URL.
     @Test
 	  public void findAllApiTest() throws Exception {
@@ -133,7 +131,7 @@
 
 #
 ## **Tesing the SpringBoot App**
-#
+
 ### 1.Create a folder under C:\Users\<user>\RateLimiter in local machine
 ### 2.Open GIT bash and run `git clone -b master https://github.com/rajiv77777/rateLimiter.git`
 ### 3.Open Spring Suite application (STS) and import the project as `existing Maven project` from C:\Users\<user>\RateLimiter. After importing do maven clean install so that the dependencies are installed.
