@@ -28,7 +28,7 @@
 ### `waitTimeGetDataByIDAPI` stores the allowed window time or wait time in **seconds**
 <br>
 
-[Github](https://github.com/rajiv77777/rateLimiter/blob/master/pics/ratelimiter-ApplicationProperties.png)
+![propertiesfile](https://github.com/rajiv77777/rateLimiter/blob/master/pics/ratelimiter-ApplicationProperties.png)
 
 ### As show above the GetAllDataApi which is `@GetMapping(value = "/api/findall")` has a preconfigured properties for ratelimiter and waitime per window.
 
@@ -67,4 +67,4 @@
     }
 
 ### The request header checks the for the secretkey and it accepts the request only if it matches the secretkey. The secretkey configuration is mentioned in application.properties file.<br> `secret=Password@#12345`<br>The secretkey can be changed from the properties file and no manual intervention on code is required. A sample postman snapshot is as below.
-[Github](https://github.com/rajiv77777/rateLimiter/blob/master/pics/secretKey-postman.png)
+![postman](https://github.com/rajiv77777/rateLimiter/blob/master/pics/secretKey-postman.png)
