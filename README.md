@@ -22,11 +22,11 @@
 `@GetMapping(value = "/api/findByID/{id}")`
 
 1. /api/findall gives all the data from the H2 Database
-2. /api/findByID/1 gives the data for the particular ID. Lets saw the Database has IDs from 1 to 10 , **/api/findByID/1** ->1 can be replaced with any numbers for 1 to 10 to fetch the datas from the particular table.
+2. /api/findByID/1 gives the data for the particular ID. Lets say the Database has IDs from 1 to 10 , **/api/findByID/1** ->1 can be replaced with any numbers for 1 to 10 to fetch the datas from the particular table.
 
 ### Each API has its own Ratelimiters configured in the application.properties file as shown in below screenshot.
-### `ratelimiterGetDataByIDAPI` stores the allowed transaction in the allowed window time <br>
-### `waitTimeGetDataByIDAPI` stores the allowed window time or wait time in **seconds**
+### Keyword `ratelimiterGetData` stores the allowed transaction in the allowed window time for the respective API <br>
+### Keyword `waitTimeGetData` stores the allowed window time or wait time in **seconds** for the respective API
 <br>
 
 ![propertiesfile](https://github.com/rajiv77777/rateLimiter/blob/master/pics/ratelimiter-ApplicationProperties.png)
@@ -74,6 +74,10 @@
 
 1. ### When a request crosses its transaction limit in the assigned window time, the API throws an exception <br> `ERROR CODE - 429 Too Many Requests` as a HTTP status code.
 2. ### When a request has a invalid secret key, the API throws <br> `ERROR CODE - 403 Forbidden` as an unauthorized user .
+### sample ERROR codes from postman are as below
+![postman](https://github.com/rajiv77777/rateLimiter/blob/master/pics/error-429.png)
+![postman](https://github.com/rajiv77777/rateLimiter/blob/master/pics/error-403.png)
+
 #
 ## **Bucket4j dependency Working and integration**
 
@@ -134,7 +138,7 @@
 
 ### 1.Create a folder under C:\Users\<user>\RateLimiter in local machine
 ### 2.Open GIT bash and run `git clone -b master https://github.com/rajiv77777/rateLimiter.git`
-### 3.Open Spring Suite application (STS) and import the project as `existing Maven project` from C:\Users\<user>\RateLimiter. After importing do maven clean install so that the dependencies are installed.
+### 3.Open Spring Suite application (STS) and import the project as `existing Maven project` from C:\Users\<user>\RateLimiter. After importing do maven-clean install so that the dependencies are installed.
 ### 4.When Maven build is successfull. Run the application as Spring boot application
 ### 5.Application will be running from port 8080. And the Spring boot startup logs has a log statement configured where it denotes the ratelimiter transcations allowed in a window time along with the configured secrectkey from the application.properties file. The sample of the loaded data from application.properties file is as below
 ### `Ratelimits and Wait time configurations - 3 20 5 30 , Secret Code for Auth Password@#12345` <br> where,

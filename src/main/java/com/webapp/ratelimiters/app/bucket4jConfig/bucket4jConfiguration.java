@@ -6,7 +6,9 @@ import io.github.bucket4j.Bucket;
 import io.github.bucket4j.Bucket4j;
 import io.github.bucket4j.Refill;
 
-
+/*
+ * Token bucket algorithm implementation
+ */
 public class bucket4jConfiguration {
 
 	public final Bucket bucket;

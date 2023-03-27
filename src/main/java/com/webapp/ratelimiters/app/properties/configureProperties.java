@@ -1,7 +1,9 @@
 package com.webapp.ratelimiters.app.properties;
 
 import java.util.ResourceBundle;
-
+/*
+ * This class is used to load ResourceBundle and fetch data from the application.properties file
+ */
 public class configureProperties {
 ResourceBundle bundle = ResourceBundle.getBundle("application");  
 	

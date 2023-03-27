@@ -24,7 +24,9 @@ public class ControllerClass {
 	
 	@Autowired
 	rateLimiterRepo repo;
-	
+	/*
+	 * static block to initialize values from properties file
+	 */
 	static {
 		 configureProperties cp = new configureProperties();
 
